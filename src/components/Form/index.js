@@ -10,15 +10,15 @@ class Form extends React.Component {
       onSubmit,
       children,
       onReset,
-      id,
     } = this.props;
+    
 
     return (
       <Formik
-        id={id || children}
         initialValues={initialValues}
         enableReinitialize={enableReinitialize}
-        onSubmit={(values) => onSubmit(values)}
+        onSubmit={(values) => 
+          onSubmit(values)}
         onReset={onReset}
       >
         {() => <FormikForm>{children}</FormikForm>}
