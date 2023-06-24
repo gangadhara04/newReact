@@ -1,15 +1,30 @@
 import React from 'react'
-import { Label, Input } from 'reactstrap'
+import { Label, Input, FormGroup, FormFeedback } from 'reactstrap'
+import { useFormikContext } from 'formik';
 
 const Text = (props) => {
-  const { label, name, placeholder, required, onChange, ...rest } = props
-    
+  const { label, name, placeholder, required, ...rest } = props
+  console.log("required:", required)
+  const { touched, errors } = useFormikContext();
+
+  const showError = touched[name] && errors[name];
+  console.log("showError:", showError)
+  const requiredMessage = `${label} is required`;
+
   return (
-    <div>
+    <FormGroup>
       <Label>{label}</Label>
-      <Input type="text" id={name} name={name} {...rest} placeholder={placeholder} onChange={onChange} required={required} />
-      <span></span>
-    </div>
+      <Input
+        type="text"
+        id={name}
+        name={name}
+        {...rest}
+        placeholder={placeholder}
+        invalid={showError}
+      />
+      {showError && <FormFeedback>{errors[name]}</FormFeedback>}
+      {required && !showError && <FormFeedback>{requiredMessage}</FormFeedback>}
+    </FormGroup>
   )
 }
 

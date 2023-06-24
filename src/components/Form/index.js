@@ -11,13 +11,13 @@ class Form extends React.Component {
       children,
       onReset,
     } = this.props;
-    
+
 
     return (
       <Formik
         initialValues={initialValues}
         enableReinitialize={enableReinitialize}
-        onSubmit={(values) => 
+        onSubmit={(values) =>
           onSubmit(values)}
         onReset={onReset}
       >

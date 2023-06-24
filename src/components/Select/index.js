@@ -1,8 +1,17 @@
 import React from 'react'
-
-const Select = () => {
+import ReactSelect from "react-select"
+import { Label } from 'reactstrap'
+const Select = (props) => {
+  const { options,label,onChange,required } = props
   return (
-    <div>Select</div>
+    <div>
+      <Label>{label}</Label>
+      <ReactSelect
+        options={options}
+        onChange={onChange}
+        required
+      />
+    </div>
   )
 }
 

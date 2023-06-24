@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
-import AddModal from '../components/Addmodal'
-import Text from '../components/Text'
+import AddModal from '../../components/Addmodal'
+import Text from '../../components/Text'
 import { Button } from 'reactstrap'
-
+import Select from '../../components/Select/index';
+import userService from '../../services/userService';
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false)
   const[name,setName]=useState("")
   const toggle = () => {
     setIsOpen(!isOpen)
   }
+  const educationDetail=[
+    {label:"BE",value:"BE"},
+    {label:"Bcom",value:"Bcom"}
+
+  ]
 const handleInput=(e)=>{
   const value=e.target.value
    setName(value)
@@ -22,16 +28,24 @@ const handleInput=(e)=>{
         onChange={handleInput}
         required={true}
       />
+      <Select
+      label={"Education"}
+      options={educationDetail}
+      />
     </>
   )
   const handleSubmit=(value)=>{
-    console.log(value,">>>>>>>>>>>>>>>>>>>")
+    const data=new FormData()
+    data.append("name",value?.name)
+    data.append("education",value?.value)
+    userService.create(data)
 }
 const accountEntryFooter = (
   <div className="container-fluid">
     <div className="col-sm-12 text-center">
       <Button type="submit" label="" className="ml-3 h6-5-important">
         Add
+
       </Button>
     </div>
   </div>
